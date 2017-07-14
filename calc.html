@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Calculator</title>
+<link href="style.css" rel='stylesheet' type='text/css' />
+<script language='JavaScript'>
+current='0';
+memory='0';
+operation=0;
+function PushOperand(number)
+{
+	if(current=='0')
+	{
+		current=number;
+	}
+	else{
+	current=current+number;
+	}
+	document.calc.show.value = current;
+}
+function PushOperator(op)
+{
+	if(op=='+')
+		operation=1;
+	if(op=='-')
+		operation=2;
+	if(op=='*')
+		operation=3;
+	if(op=='/')
+		operation=4;
+	memory=current;
+	current="";
+	document.calc.show.value = current;
+}
+function PerformCalculation()
+{
+	if(operation==1)
+		current=eval(memory)+eval(current);
+	if(operation==2)
+		current=eval(memory)-eval(current);
+	if(operation==3)
+		current=eval(memory)*eval(current);
+	if(operation==4 && eval(current)!= 0)
+		current=eval(memory)/eval(current);
+	operation=0;
+	memory='0';
+	current=current+'';
+	document.calc.show.value = current;
+}
+function DisplayResult()
+ {
+  current = document.calc.show.value;
+  current = "" + parseFloat(current);
+  document.calc.show.value = current;
+ }
+function AllClear()             
+ { 
+   current = "0";
+   operation = 0;                
+   memory = "0";                  
+   document.calc.show.value = current;
+ }
+
+</script>
+</head>
+<body>
+<div align="center">
+<form name="calc">
+<table width="25%" border="2">
+<tr>
+<td colspan="2" align="center"><b><font face="Lucida Calligraphy, Verdana, Arial" size="4">My Calculator<br></font></br>
+<font face="Courier" size="5"><input type="text" maxlength="50" size="35" name="show" onChange="DisplayResult()"></font></b>
+</td>
+</tr>
+<tr><td width="65%" align="center"> 
+<table>
+<tr>
+  <td><input type="button" name="seven" value="   7    " OnClick="PushOperand('7')"></td>
+  <td><input type="button" name="eight" value="   8    " OnClick="PushOperand('8')"></td>
+  <td><input type="button" name="nine" value="   9    " OnClick="PushOperand('9')"></td>
+  <td><input type="button" name="mul" value="   x    " OnClick="PushOperator('*')"></td>
+</tr>
+<tr>
+  <td><input type="button" name="four" value="   4    " OnClick="PushOperand('4')"></td>
+  <td><input type="button" name="five" value="   5    " OnClick="PushOperand('5')"></td>
+  <td><input type="button" name="six" value="   6    " OnClick="PushOperand('6')"></td>
+  <td><input type="button" name="sub" value="   -    " OnClick="PushOperator('-')"></td>
+</tr>
+<tr>
+  <td><input type="button" name="one" value="   1    " OnClick="PushOperand('1')"></td>
+  <td><input type="button" name="two" value="   2    " OnClick="PushOperand('2')"></td>
+  <td><input type="button" name="three" value="   3    " OnClick="PushOperand('3')"></td>
+  <td><input type="button" name="add" value="   +    " OnClick="PushOperator('+')"></td>
+</tr>
+<tr>
+  <td><input type="button" name="div" value="   /    " OnClick="PushOperator('/')"></td>
+  <td><input type="button" name="one" value="   0    " OnClick="PushOperand('0')"></td>
+  <td><input type="button" name="AC" value="   AC    " OnClick="AllClear()"></td>
+  <td><input type="button" name="result" value="   =    " OnClick="PerformCalculation()"></td>
+</tr>
+</table>
+</form></div>
+</body>
+</html>
